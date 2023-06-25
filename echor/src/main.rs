@@ -1,20 +1,11 @@
-use clap::Parser;
-
-#[derive(Parser, Debug)]
-#[command(author, version, about, long_about = None)]
-struct Args {
-    #[arg(short, long)]
-    name: String,
-
-    #[arg(short, long, default_value_t = 1)]
-    count: u8
-}
+use clap::{builder::Command, Arg};
 fn main() {
-    // println!("Hello, world!");
-
-    let args = Args::parse();
-
-    for _ in 0..args.count {
-        println!("hello, {}", args.name)
-    }
+    let matches = Command::new("echor")
+                    .arg(Arg::new("text")
+                        .value_name("TEXT")
+                        .help("input text")
+                        .required(true))
+                    .get_matches();
+    let mut text = matches.get_raw("text").expect("msg").into_iter();
+    println!("{:?}", text.next());
 }
