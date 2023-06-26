@@ -7,5 +7,8 @@ fn main() {
                         .required(true))
                     .get_matches();
     let mut text = matches.get_raw("text").expect("msg").into_iter();
-    println!("{:?}", text.next());
+    if let Some(con) = text.next() {
+        print!("{:?}", con);
+    }
+    
 }
